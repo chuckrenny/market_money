@@ -1,35 +1,48 @@
 require 'rails_helper'
 
-describe "Books API" do
-  it "sends a list of books" do
-    create_list(:book, 3)
+describe "Markets API" do
+  it "sends a list of markets" do
+    create_list(:market, 3)
 
-    get '/api/v1/books'
+    get '/api/v0/markets'
 
     expect(response).to be_successful
 
-    books = JSON.parse(response.body, symbolize_names: true)
+    markets = JSON.parse(response.body, symbolize_names: true)
 
-    expect(books.count).to eq(3)
+    expect(markets.count).to eq(3)
 
-    books.each do |book|
-      expect(book).to have_key(:id)
-      expect(book[:id]).to be_an(Integer)
+    markets.each do |market|
+      expect(market).to have_key(:id)
+      expect(market[:id]).to be_an(Integer)
 
-      expect(book).to have_key(:title)
-      expect(book[:title]).to be_a(String)
+      expect(market).to have_key(:name)
+      expect(market[:name]).to be_a(String)
 
-      expect(book).to have_key(:author)
-      expect(book[:author]).to be_a(String)
+      expect(market).to have_key(:street)
+      expect(market[:street]).to be_a(String)
 
-      expect(book).to have_key(:genre)
-      expect(book[:genre]).to be_a(String)
+      expect(market).to have_key(:city)
+      expect(market[:city]).to be_a(String)
 
-      expect(book).to have_key(:summary)
-      expect(book[:summary]).to be_a(String)
+      expect(market).to have_key(:county)
+      expect(market[:county]).to be_a(String)
 
-      expect(book).to have_key(:number_sold)
-      expect(book[:number_sold]).to be_an(Integer)
+      expect(market).to have_key(:state)
+      expect(market[:state]).to be_an(String)
+
+      expect(market).to have_key(:zip)
+      expect(market[:zip]).to be_an(String)
+
+      expect(market).to have_key(:lat)
+      expect(market[:lat]).to be_an(String)
+
+
+      expect(market).to have_key(:lon)
+      expect(market[:lon]).to be_an(String)
+
+      expect(market).to have_key(:vendor_count)
+      expect(market[:vendor_count]).to be_an(Integer)
     end
   end
 end
