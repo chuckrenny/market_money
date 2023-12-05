@@ -10,11 +10,24 @@ RSpec.describe Market, type: :model do
     it { should validate_presence_of(:zip) }
     it { should validate_presence_of(:lat) }
     it { should validate_presence_of(:lon) }
-    it { should validate_presence_of(:vendor_count) }
   end
 
-  # describe "relationships" do
+  describe "relationships" do
+    it { should have_many(:market_vendors)}
+    it { should have_many(:vendors).through(:market_vendors)}
+  end
 
+  describe "#instance_method" do
+    describe "#vendor_count" do
+      it "returns the correct number of associated vendors" do
+        market = create(:market)
+        3.times do
+          vendor = create(:vendor)
+          MarketVendor.create!(market: market, vendor: vendor)
+        end
 
-  # end
+        expect(market.vendor_count).to eq(3)
+      end
+    end
+  end
 end
