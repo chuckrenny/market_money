@@ -40,7 +40,7 @@ describe 'Markets Request' do
 
         expect(market[:attributes]).to have_key(:lon)
         expect(market[:attributes][:lon]).to be_an(String)
-
+# require 'pry';binding.pry
         expect(market[:attributes]).to have_key(:vendor_count)
         expect(market[:attributes][:vendor_count]).to be_an(Integer)
       end
