@@ -29,7 +29,7 @@ RSpec.describe Vendor, type: :model do
     it 'is not valid when credit_accepted is not true or false' do
       vendor = Vendor.new(credit_accepted: nil)
       vendor.valid?
-      expect(vendor.errors[:credit_accepted]).to include("must be true or false")
+      expect(vendor.errors[:credit_accepted]).to include("must be boolean")
     end
   end
 end
