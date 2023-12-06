@@ -138,9 +138,38 @@ RSpec.describe '/api/v0/vendors path', type: :request do
         expect(response.status).to eq(400)
         
         data = JSON.parse(response.body, symbolize_names: true)
-        # require 'pry';binding.pry
+  
         expect(data[:errors]).to be_a(Array)
         expect(data[:errors].first).to eq("Contact name can't be blank")
+      end
+    end
+
+    describe "Can delete a Vendor /api/v0/vendors/:id path" do
+      it "can destroy a vendor" do
+        vendor = create(:vendor)
+  
+        expect(Vendor.count).to eq(1)
+  
+        delete "/api/v0/vendors/#{vendor.id}"
+  
+        expect(response).to be_successful
+        expect(Vendor.count).to eq(0)
+        expect{Vendor.find(vendor.id)}.to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it 'cannot delete a vendor with invalid id during sad path' do
+        invalid_id = 123123123
+        vendor_params = { contact_name: 'Invalid Vendor', credit_accepted: false }
+        headers = {"CONTENT_TYPE" => "application/json"}
+        
+        delete "/api/v0/vendors/#{invalid_id}", headers: headers, params: JSON.generate({vendor: vendor_params})
+      
+        expect(response).to_not be_successful
+        expect(response.status).to eq(404)
+        
+        data = JSON.parse(response.body, symbolize_names: true)
+        expect(data[:errors]).to be_a(Array)
+        expect(data[:errors].first[:message]).to eq("Couldn't find Vendor with 'id'=#{invalid_id}")
       end
     end
   end

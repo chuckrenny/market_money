@@ -7,7 +7,6 @@ class Api::V0::VendorsController < ApplicationController
   end
 
   def create
-    # require 'pry';binding.pry
     vendor = Vendor.new(vendor_params)
 
     if vendor.save
@@ -28,6 +27,12 @@ class Api::V0::VendorsController < ApplicationController
     else
       render json: { errors: vendor.errors.full_messages }, status: :bad_request # 400
     end
+  end
+
+  def destroy
+    vendor = Vendor.find(params[:id])
+    vendor.destroy
+    head :no_content
   end
 
   private
