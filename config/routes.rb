@@ -10,7 +10,7 @@ Rails.application.routes.draw do
         get 'vendors', to: 'market_vendors#index'
       end
 
-      resources :vendors, only: [:show, :create, :update]
+      resources :vendors, only: [:show, :create, :update, :destroy]
     end
   end
 end
