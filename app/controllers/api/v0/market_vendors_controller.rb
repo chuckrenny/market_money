@@ -1,12 +1,11 @@
-class Api::V0::Markets::VendorsController < ApplicationController
+class Api::V0::MarketVendorsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_response
 
   def index
     # require 'pry';binding.pry
     market = Market.find(params[:market_id])
     vendors = market.vendors
-    render json: VendorSerializer.new(vendors).serializable_hash
-    # render json: VendorSerializer.new(vendors)
+    render json: VendorSerializer.new(vendors)
   end
 
   private

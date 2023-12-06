@@ -7,10 +7,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v0 do
       resources :markets, only: [:index, :show] do
-        resources :vendors, only: [:index], module: :markets
+        get 'vendors', to: 'market_vendors#index'
       end
 
-      resources :vendors, only: [:show]
+      resources :vendors, only: [:show, :create]
     end
   end
 end
