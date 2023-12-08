@@ -12,9 +12,8 @@ class Api::V0::VendorsController < ApplicationController
     if vendor.save
       render json: VendorSerializer.new(vendor), status: :created
     else
-      # Issue US 5, # 2
-      # render json: VendorSerializer.new(vendor), status: :bad_request #why doesn't this work
-      render json: { errors: vendor.errors.full_messages }, status: :bad_request #hand roll
+      render json: { errors: vendor.errors.full_messages }, status: :bad_request # hand roll
+      # render json: ErrorSerializer.new(vendor.errors.full_messages), status: :bad_request
     end
   end
 
@@ -26,6 +25,7 @@ class Api::V0::VendorsController < ApplicationController
       render json: VendorSerializer.new(vendor), status: :created
     else
       render json: { errors: vendor.errors.full_messages }, status: :bad_request # 400
+      # render json: ErrorSerializer.new(vendor.errors.full_messages), status: :bad_request
     end
   end
 
