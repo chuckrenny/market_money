@@ -139,8 +139,8 @@ RSpec.describe '/api/v0/vendors path', type: :request do
         
         data = JSON.parse(response.body, symbolize_names: true)
   # require 'pry';binding.pry
-        expect(data[:error_object]).to be_a(Array)
-        expect(data[:error_object].first).to eq("Contact name can't be blank")
+        expect(data[:errors]).to be_a(Array)
+        expect(data[:errors].first).to eq("Contact name can't be blank")
       end
     end
 
