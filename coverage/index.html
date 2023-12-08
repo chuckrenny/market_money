@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-12-08T02:02:42-08:00">2023-12-08T02:02:42-08:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-12-08T03:54:33-08:00">2023-12-08T03:54:33-08:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -176,7 +176,7 @@
             <td class="cell--number">5</td>
             <td class="cell--number">5</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">2.80</td>
+            <td class="cell--number">2.60</td>
             
           </tr>
         
@@ -1694,24 +1694,24 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="15">
-            
-            
-
-            
-
-            <code class="ruby">      # render json: { errors: vendor.errors.full_messages }, status: :bad_request # hand roll</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="16">
+          <li class="covered" data-hits="1" data-linenumber="15">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">      render json: ErrorSerializer.new(vendor.errors.full_messages), status: :bad_request</code>
+            <code class="ruby">      render json: { errors: vendor.errors.full_messages }, status: :bad_request # hand roll</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="16">
+            
+            
+
+            
+
+            <code class="ruby">      # render json: ErrorSerializer.new(vendor.errors.full_messages), status: :bad_request</code>
           </li>
         </div>
       
@@ -2747,8 +2747,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="6" data-linenumber="3">
-            <span class="hits">6</span>
+          <li class="covered" data-hits="5" data-linenumber="3">
+            <span class="hits">5</span>
             
 
             
@@ -9797,13 +9797,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="88">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="88">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">        # require &#39;pry&#39;;binding.pry</code>
+            
+
+            <code class="ruby">        require &#39;pry&#39;;binding.pry</code>
           </li>
         </div>
       
@@ -9814,7 +9814,7 @@
 
             
 
-            <code class="ruby">        expect(data[:error_object]).to be_a(Array)</code>
+            <code class="ruby">        expect(data[:errors]).to be_a(Array)</code>
           </li>
         </div>
       
@@ -9825,7 +9825,7 @@
 
             
 
-            <code class="ruby">        expect(data[:error_object].join(&#39;, &#39;)).to eq(&quot;Contact name can&#39;t be blank, Contact phone can&#39;t be blank&quot;)</code>
+            <code class="ruby">        expect(data[:errors].join(&#39;, &#39;)).to eq(&quot;Contact name can&#39;t be blank, Contact phone can&#39;t be blank&quot;)</code>
           </li>
         </div>
       
@@ -10380,13 +10380,13 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="141">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="141">
+            
             
 
             
 
-            <code class="ruby">  require &#39;pry&#39;;binding.pry</code>
+            <code class="ruby">  # require &#39;pry&#39;;binding.pry</code>
           </li>
         </div>
       
