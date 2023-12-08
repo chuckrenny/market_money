@@ -2,21 +2,10 @@ class Api::V0::MarketVendorsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_response
 
   def index
-    # require 'pry';binding.pry
     market = Market.find(params[:market_id])
     vendors = market.vendors
     render json: VendorSerializer.new(vendors)
   end
-
-  # def create
-  #   market_vendor = MarketVendor.new(market_vendor_params)
-
-  #   if market_vendor.save 
-  #     render json: market_vendor, status: :created
-  #   else
-  #     render json: ErrorSerializer.new(market_vendor.errors.full_messages), status: :not_found
-  #   end
-  # end
 
   def create
     unless Market.exists?(market_vendor_params[:market_id])
@@ -41,7 +30,6 @@ class Api::V0::MarketVendorsController < ApplicationController
   end
 
   def destroy
-    # require 'pry';binding.pry
     market = Market.find(params[:market_id])
     vendor = Vendor.find(params[:vendor_id])
     market_vendor = MarketVendor.find_by(market_id: market, vendor_id: vendor)

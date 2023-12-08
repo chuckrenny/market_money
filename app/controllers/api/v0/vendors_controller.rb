@@ -18,7 +18,6 @@ class Api::V0::VendorsController < ApplicationController
   end
 
   def update
-    # require 'pry';binding.pry
     vendor = Vendor.find(params[:id])
 
     if vendor.update(vendor_params)
