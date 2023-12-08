@@ -134,5 +134,34 @@ RSpec.describe 'Market Vendors path', type: :request do
         expect(data[:errors].first[:detail]).to include("Market vendor association between market with market_id=#{market.id} and vendor_id=#{vendor.id} already exists")
       end      
     end
+
+    describe "Delete a MarketVendor /api/v0/market_vendors" do
+      it "can destroy a marketvendor association" do
+        market = create(:market)
+        vendor = create(:vendor)
+        
+        market_vendor = MarketVendor.create!(market_id: market.id, vendor_id: vendor.id)
+        expect(MarketVendor.count).to eq(1)
+  
+        delete "/api/v0/market_vendors", params: { market_id: market.id, vendor_id: vendor.id}
+  
+        expect(response.status).to eq(204)
+        expect(MarketVendor.count).to eq(0)
+        expect{MarketVendor.find(market_vendor.id)}.to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it 'sad path for deleting market vendors, must have vendor_id and market_id' do
+        market = create(:market, id: 1)
+        vendor = create(:vendor, id: 1)
+    
+        delete "/api/v0/market_vendors", params: { market_id: 1, vendor_id: 1}
+    
+        market_vendor = JSON.parse(response.body, symbolize_names: true)
+    
+        expect(response).to_not be_successful
+        expect(response.status).to eq(404)
+        expect(market_vendor[:errors][0][:message]).to eq("No MarketVendor with market_id=#{market.id} and vendor_id=#{vendor.id} exists")
+      end
+    end
   end
 end
